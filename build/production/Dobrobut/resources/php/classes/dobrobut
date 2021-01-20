@@ -1,0 +1,77 @@
+UPDATE `ADDRESS` SET  osmd_id = 6  WHERE `house_id` =41
+UPDATE `APPARTMENT` SET osmd_id = 6  WHERE `house_id` =41
+UPDATE `KVARTPLATA` SET osmd_id = 6  WHERE `house_id` =41 and osmd = 1
+UPDATE `BKVARTPLATA` SET osmd_id = 6  WHERE `house_id` =41 and osmd = 1
+UPDATE `OPLATA` SET  osmd_id = 6  WHERE `house_id` =41 and osmd = 1  and data >= '20170101'
+
+
+UPDATE `KVARTPLATA` SET  `osmd` =1,osmd_id = 24  WHERE `house_id` in(4,5,6,9,16,25,26,27,41,48,72) and data = '20170501'
+
+
+
+UPDATE `HOUSE` SET  `osmd` =1,osmd_id = 24  WHERE `house_id` in(4,5,6,9,16,25,26,27,41,48,72)
+UPDATE `APPARTMENT`SET  `osmd` =1,osmd_id = 24  WHERE `house_id` in(4,5,6,9,16,25,26,27,41,48,72)
+UPDATE `KVARTPLATA` SET  `osmd` =1,osmd_id = 24  WHERE `house_id` in(4,5,6,9,16,25,26,27,41,48,72) and data = '20170501'
+UPDATE `BKVARTPLATA` SET  `osmd` =1,osmd_id = 24  WHERE `house_id` in(4,5,6,9,16,25,26,27,41,48,72) and data = '20170501'
+UPDATE `OPLATA` SET  `osmd` =1,osmd_id = 24  WHERE `house_id` in(4,5,6,9,16,25,26,27,41,48,72) and data =>'20170401'
+
+UPDATE YIS.OPLATA as t1 ,YIS.HOUSE as t2  SET t1.data_in =  t1.data_in, t1.osmd_id = t2.osmd_id  WHERE t1.`house_id` = t2.house_id and t1.data >='20170101' and t1.osmd = 1 and  t1.`kvartplata` != 0
+
+UPDATE OPLATA as t1 , HOUSE as t2  SET  t1.`osmd_id` =t2.osmd_id  WHERE t1.`house_id` = t2.house_id and  t1.`data`BETWEEN '20170101' and '20170430' AND  t1.`osmd` = 1 AND   t1.`dolg` = 0  and t1.`kvartplata` != 0 V
+UPDATE APPARTMENT as t1 , HOUSE as t2  SET  t1.`osmd_id` =t2.osmd_id  WHERE t1.`house_id` = t2.house_id V
+UPDATE ADDRESS as t1 , HOUSE as t2  SET  t1.`osmd_id` =t2.osmd_id  WHERE t1.`house_id` = t2.house_id V
+
+UPDATE KVARTPLATA as t1 , HOUSE as t2  SET  t1.`osmd_id` =t2.osmd_id  WHERE t1.`house_id` = t2.house_id and  t1.`data`BETWEEN '20170101' and '20170501' 
+UPDATE BKVARTPLATA as t1 , HOUSE as t2  SET  t1.`osmd_id` =t2.osmd_id  WHERE t1.`house_id` = t2.house_id and  t1.`data`BETWEEN '20170101' and '20170401' V
+UPDATE PAYMENT as t1 , HOUSE as t2  SET  t1.`osmd_id` =t2.osmd_id  WHERE t1.`house_id` = t2.house_id and  t1.`data`BETWEEN '20170101' and '20170401' V
+
+UPDATE YISGRAND.MTB_PAYMENT  as t1 , YIS.HOUSE as t2  SET  t1.`osmd_id` =t2.osmd_id  WHERE t1.`house_id` = t2.house_id and  t1.`data`BETWEEN '20170101' and '20170401' V
+UPDATE `APPARTMENT` SET `osmd` =0 ,`osmd_id` = 0 WHERE `house_id` = 23
+UPDATE `ADDRESS` SET `osmd` =0 ,`osmd_id` = 0 WHERE `house_id` = 23
+
+   ControlOsmd VV
+   ControlAllOsmd VV
+   ControlAllDobrobut проверить после 1 мая VV
+   ItogMonthDobrobut VV
+   ItogMonthOsmd VV
+   ItogMonthMgkc
+   NachislenoAllDobrobut
+   nachislenie_kvartplata_osmd
+   pereraschet_kvartplata_osmd
+   newOplataAppOsmd V
+   newOplataApp	V
+   newPaymentApp	V
+   newPaymentMarfin V
+   Bank_PIVDENNYI_Oplata_App VV
+   Bank_MTB_Oplata_App VV
+   perevod_saldo_life_fond V
+   addHouseOsmd V
+   KassaReestrOsmdYtke V
+   KassaReestrOsmdRazvYtke V
+    KassaReestrOsmdVik V
+   KassaReestrOsmdRazvVik V
+
+(CALL YISGRAND.nachislenie_kvartplata("5",@success,@msg)
+CALL YISGRAND.nachislenie_kvartplata_osmd("5",@success,@msg);
+
+UPDATE YISGRAND.LGOTA_UTSZN as t1 , YIS.HOUSE as t2  SET  t1.`osmd_id` =t2.osmd_id  WHERE t1.`house_id` = t2.house_id
+
+UPDATE `HOUSE` SET `street` = 443   WHERE `street_id`  = 2 desanta
+UPDATE `HOUSE` SET `street` = 1301   WHERE `street_id`  = 5 prim
+UPDATE `HOUSE` SET `street` = 837   WHERE `street_id`  in(1,34) lenina
+UPDATE `HOUSE` SET `street` = 1714   WHERE `street_id`  = 4 xim
+UPDATE `HOUSE` SET `street` = 3028   WHERE `street_id`  = 3 prim
+UPDATE `HOUSE` SET `street` = 7300   WHERE `street_id`  = 6 n-b
+UPDATE `HOUSE` SET `street` = 445   WHERE `street_id`  = 26 ivanova
+UPDATE `HOUSE` SET `street` = 3940   WHERE `street_id`  = 9 kedr
+
+UPDATE `HOUSE` SET `street` = 443   WHERE `street_id`  = 2;
+UPDATE `HOUSE` SET `street` = 1301   WHERE `street_id`  = 5;
+UPDATE `HOUSE` SET `street` = 837   WHERE `street_id`  in(1,34);
+UPDATE `HOUSE` SET `street` = 1714   WHERE `street_id`  = 4;
+UPDATE `HOUSE` SET `street` = 3028   WHERE `street_id`  = 3;
+UPDATE `HOUSE` SET `street` = 7300   WHERE `street_id`  = 6;
+UPDATE `HOUSE` SET `street` = 445   WHERE `street_id`  = 26;
+UPDATE `HOUSE` SET `street` = 3940   WHERE `street_id`  = 9;
+
+Т.Г.Шевченка 1

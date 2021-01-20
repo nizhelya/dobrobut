@@ -1,0 +1,29 @@
+SELECT 
+t1.`address_id`,
+t1.`address`,
+CASE IFNULL(t1.`osmd`,0)  WHEN  0 THEN IFNULL(t1.`zadol`,0)  ELSE IFNULL(t1.fzadol,0) END as zad,
+t1.zadol as z,
+t1.fzadol as fz,
+CASE IFNULL(t1.`osmd`,0)  WHEN  0 THEN IFNULL(t1.`tarif`,0)  ELSE 0 END as tar ,
+CASE IFNULL(t1.`osmd`,0)  WHEN  0 THEN IFNULL(t1.`square`,0)  ELSE 0 END as s,
+CASE IFNULL(t1.`osmd`,0)  WHEN  0 THEN IFNULL(t1.`kvartplata`,0)  ELSE 0 END as kv,
+CASE IFNULL(t1.`osmd`,0)  WHEN  0 THEN IFNULL(t1.`perer`,0)  ELSE 0 END as per,
+CASE IFNULL(t1.`osmd`,0)  WHEN  0 THEN IFNULL(t1.`nachisleno`,0)  ELSE 0 END as nach,
+CASE IFNULL(t1.`osmd`,0)  WHEN  0 THEN IFNULL(t1.`oplacheno`,0) ELSE IFNULL(t1.`foplacheno`,0) END  as oplata,
+t1.oplacheno as o,
+t1.foplacheno as fo,
+CASE IFNULL(t1.`osmd`,0)  WHEN  0 THEN IFNULL(t1.`budjet`,0)  ELSE 0 END as lg,
+CASE IFNULL(t1.`osmd`,0)  WHEN  0 THEN IFNULL(t1.`pbudjet`,0)  ELSE 0 END as plg ,
+CASE IFNULL(t1.`osmd`,0)  WHEN  0 THEN (IFNULL(t1.`budjet`,0)+IFNULL(t1.`pbudjet`,0))  ELSE 0 END as lgota ,
+CASE IFNULL(t1.`osmd`,0)  WHEN  0 THEN IFNULL(t1.`dolg`,0)  ELSE IFNULL(t1.`fdolg`,0) END as dolg,
+t1.dolg as d,
+t1.fdolg as fd,
+
+t1.osmd
+FROM YIS.KVARTPLATA as t1 WHERE t1.`data`= '20170401' and t1.house_id = 20 limit 300
+
+
+SELECT CASE IFNULL(t1.`osmd`,0)  WHEN  0 THEN IFNULL(t1.`dolg`,0)  ELSE IFNULL(t1.`fdolg`,0) END as d ,t1.osmd FROM YIS.KVARTPLATA as t1 WHERE t1.`house_id`= 20  AND t1.`data`= '20170301'
+
+
+SELECT  t1.*,CONCAT(t1.`surname`," ",t1.`firstname`," ",t1.`lastname` ) as fio ,(SELECT t2.`law_article` FROM YIS.LGOTA as t2 WHERE  t2.`lgota_id` = t1.`lgota_id` ) as law_article,DATE_FORMAT(t1.data_in,"%Y-%m-%d") as data_in FROM YIS.LGOTAMEN as t1 WHERE 1 ORDER BY t1.`address_id`
